@@ -1,0 +1,42 @@
+#-*- coding: utf-8 -*-
+import csv
+import os
+import pymysql
+ 
+def sql_inert(sql,y):
+    conn = pymysql.connect(host="10.xxx.xx.xxx",port=3306,user="username",password="***",database="db_name")
+    cur=conn.cursor()
+    cur.execute(sql,y)
+    conn.commit()
+    conn.close()
+    
+def csv_reader(local_dir):
+    for root,dirs,files in os.walk(local_dir):
+        for file in files:
+            file_long = os.path.join(root,file)
+            csvReader = csv.DictReader(open(file_long, 'r'))
+            for row in csvReader:
+                values = row.values()
+                if 'Program name' in values:
+                    program_name = row['']
+                elif 'Last edit' in values:
+                    last_edit = row['']
+                elif 'Ratio of Retry' in values:
+                    ratio_of_retry = row[''].strip()
+                elif 'Total Picked' in values:
+                    total_picked = row['']
+                elif 'Components picked' in values:
+                    components_picked = row['']
+            print('[%s][%s][%s][%s][%s][%s]' % (file_long,program_name,last_edit,ratio_of_retry,total_picked,components_picked))
+            y = ('CJJ1',program_name,last_edit,ratio_of_retry,total_picked,components_picked)
+            sql = 'insert into tb_cjj1 (device,program_name,last_edit,ratio_of_retry,total_picked,components_picked) values (%s,%s,%s,%s,%s,%s)'
+            print(sql)
+            sql_inert(sql,y)
+            
+ 
+ 
+ 
+ 
+if __name__=='__main__':
+     local_dir=r'D:\Delnorte1u-5.11'
+     csv_reader(local_dir)
