@@ -13,9 +13,8 @@ def loadFileInformation(filename):
 	information['StudyTime'] = ds.StudyTime
 	information['InstitutionName'] = ds.InstitutionName
 	information['Manufacturer'] = ds.Manufacturer
-	print(dir(ds))
-	print(type(information))
+	print(ds)
+	print(information)
 	return information
 
-a=loadFileInformation("/home/daven/Documents/MedData/dr_sample/1.2.156.147522.44.410947.28674.20180314091415/1.2.156.147522.44.410947.28674.1.20180314091459/1.2.156.147522.44.410947.28674.1.1.20180314091459.dcm")
-print(a)
+a=loadFileInformation("/Users/daven/个人资料/项目/肖晟老师/MedData/MedData/dr_sample/1.2.156.147522.44.410947.28674.20180314091415/1.2.156.147522.44.410947.28674.1.20180314091459/1.2.156.147522.44.410947.28674.1.1.20180314091459.dcm")
